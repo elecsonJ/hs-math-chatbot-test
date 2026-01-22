@@ -22,7 +22,7 @@ if not GOOGLE_API_KEY:
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Initialize Gemini Model
-MODEL_NAME = "gemini-2.0-flash-exp" 
+MODEL_NAME = "gemini-3-flash-preview"
 model = genai.GenerativeModel(MODEL_NAME, generation_config={"response_mime_type": "application/json"})
 
 DEFAULT_SPARQL_PROMPT = """
@@ -104,7 +104,7 @@ DEFAULT_ANSWER_PROMPT = """
        - Create an 'evidence' list based strictly on the 'Retrieved Knowledge'.
        - **IMPORTANT**: Even if the concept is "Out of Curriculum" or "Ambiguous", you MUST list the retrieved related concepts in `evidence` so they can be visualized.
        - Map the data to: subject, chapter, concept, and desc (short reason for relevance).
-       - If hierarchy info (subject/chapter) is missing, infer it from the context or use "Unknown".
+       - If hierarchy info (subject/chapter) is missing, do NOT infer it. STRICTLY use "Unknown" or "None".
        
     ### Output Format (JSON)
     Strictly adhere to this Typescript Interface:
